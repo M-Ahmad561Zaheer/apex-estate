@@ -10,15 +10,23 @@ import {
   Users, 
   DollarSign 
 } from 'lucide-react';
+import { motion } from 'framer-motion';
 import PropertyCard from './PropertyCard';
 
 export default function DashboardView() {
   return (
-    <div className="w-full max-w-6xl mx-auto bg-slate-50 rounded-[2rem] overflow-hidden shadow-2xl border-[8px] border-slate-900/5 flex flex-col md:flex-row h-[700px]">
+    <motion.div 
+      initial={{ opacity: 0, y: 40 }} // Start position
+      whileInView={{ opacity: 1, y: 0 }} // Animate to this
+      viewport={{ once: true, margin: "-100px" }} // Jab 100px screen par aaye tab chale
+      transition={{ duration: 0.8, ease: "easeOut" }}
+      className="w-full max-w-6xl mx-auto bg-slate-50 dark:bg-slate-900 rounded-[2rem] overflow-hidden shadow-2xl border-[8px] border-slate-900/5 dark:border-white/5 flex flex-col md:flex-row h-[700px] transition-colors duration-500"
+    >
+    <div className="w-full max-w-6xl mx-auto bg-slate-50 dark:bg-slate-900 rounded-[2rem] overflow-hidden shadow-2xl border-[8px] border-slate-900/5 dark:border-white/5 flex flex-col md:flex-row h-[700px] transition-colors duration-500" >
       
       {/* 1. Sidebar (Mini) */}
-      <div className="hidden md:flex w-20 bg-slate-900 flex-col items-center py-8 gap-8">
-        <div className="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center text-white font-bold italic">
+      <div className="hidden md:flex w-20 bg-slate-900 dark:bg-black flex-col items-center py-8 gap-8 border-r border-white/5">
+        <div className="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center text-white font-bold italic shadow-lg shadow-blue-500/20">
           A
         </div>
         <nav className="flex flex-col gap-6">
@@ -31,21 +39,21 @@ export default function DashboardView() {
       </div>
 
       {/* 2. Main Content Area */}
-      <div className="flex-1 flex flex-col overflow-hidden bg-slate-50">
+      <div className="flex-1 flex flex-col overflow-hidden bg-slate-50 dark:bg-slate-950">
         
         {/* Top Header inside Dashboard */}
-        <header className="bg-white border-b border-slate-200 px-8 py-4 flex justify-between items-center">
+        <header className="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 px-8 py-4 flex justify-between items-center transition-colors">
           <div className="relative hidden sm:block">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={16} />
             <input 
               type="text" 
               placeholder="Search assets..." 
-              className="pl-10 pr-4 py-2 bg-slate-100 rounded-lg text-xs outline-none w-64 focus:ring-1 ring-blue-500"
+              className="pl-10 pr-4 py-2 bg-slate-100 dark:bg-slate-800 dark:text-white rounded-lg text-xs outline-none w-64 focus:ring-1 ring-blue-500 transition-all"
             />
           </div>
           <div className="flex items-center gap-4">
-            <Bell size={20} className="text-slate-400" />
-            <div className="h-8 w-8 bg-blue-100 rounded-full border border-blue-200 flex items-center justify-center text-[10px] font-bold text-blue-600">
+            <Bell size={20} className="text-slate-400 hover:text-blue-500 cursor-pointer" />
+            <div className="h-8 w-8 bg-blue-100 dark:bg-blue-900/30 rounded-full border border-blue-200 dark:border-blue-800 flex items-center justify-center text-[10px] font-bold text-blue-600 dark:text-blue-400">
               AD
             </div>
           </div>
@@ -55,44 +63,45 @@ export default function DashboardView() {
         <div className="flex-1 overflow-y-auto p-8 custom-scrollbar">
           <div className="flex justify-between items-end mb-8">
             <div>
-              <h3 className="text-2xl font-bold text-slate-900 tracking-tight">Executive Overview</h3>
-              <p className="text-slate-500 text-sm">Real-time portfolio performance</p>
+              <h3 className="text-2xl font-bold text-slate-900 dark:text-white tracking-tight">Executive Overview</h3>
+              <p className="text-slate-500 dark:text-slate-400 text-sm">Real-time portfolio performance</p>
             </div>
-            <div className="flex gap-2 bg-white p-1 rounded-lg border border-slate-200">
-              <button className="px-3 py-1 bg-slate-900 text-white text-[10px] font-bold rounded-md">ALL TIME</button>
-              <button className="px-3 py-1 text-slate-500 text-[10px] font-bold">24H</button>
+            <div className="flex gap-2 bg-white dark:bg-slate-800 p-1 rounded-lg border border-slate-200 dark:border-slate-700">
+              <button className="px-3 py-1 bg-slate-900 dark:bg-blue-600 text-white text-[10px] font-bold rounded-md transition-all">ALL TIME</button>
+              <button className="px-3 py-1 text-slate-500 dark:text-slate-400 text-[10px] font-bold hover:text-blue-600 transition-colors">24H</button>
             </div>
           </div>
 
           {/* Stats Cards */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-10">
-            <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
-              <div className="flex justify-between items-start mb-4 text-emerald-600 bg-emerald-50 w-fit p-2 rounded-lg">
+            <div className="bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm transition-all hover:border-emerald-500/30">
+              <div className="flex justify-between items-start mb-4 text-emerald-600 bg-emerald-50 dark:bg-emerald-900/20 w-fit p-2 rounded-lg">
                 <DollarSign size={20} />
               </div>
               <p className="text-slate-400 text-[10px] font-bold uppercase tracking-widest">Total Assets</p>
-              <h4 className="text-2xl font-black text-slate-900">$24,150,000</h4>
+              <h4 className="text-2xl font-black text-slate-900 dark:text-white">$24,150,000</h4>
             </div>
 
-            <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
-              <div className="flex justify-between items-start mb-4 text-blue-600 bg-blue-50 w-fit p-2 rounded-lg">
+            <div className="bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm transition-all hover:border-blue-500/30">
+              <div className="flex justify-between items-start mb-4 text-blue-600 bg-blue-50 dark:bg-blue-900/20 w-fit p-2 rounded-lg">
                 <TrendingUp size={20} />
               </div>
               <p className="text-slate-400 text-[10px] font-bold uppercase tracking-widest">Growth Rate</p>
-              <h4 className="text-2xl font-black text-slate-900">+12.40%</h4>
+              <h4 className="text-2xl font-black text-slate-900 dark:text-white">+12.40%</h4>
             </div>
 
-            <div className="bg-slate-900 p-6 rounded-2xl shadow-xl text-white">
-              <div className="flex justify-between items-start mb-4 text-blue-400 bg-slate-800 w-fit p-2 rounded-lg">
+            {/* Premium Card - Becomes even darker/sleeker in Dark Mode */}
+            <div className="bg-slate-900 dark:bg-blue-700 p-6 rounded-2xl shadow-xl text-white transition-all duration-500">
+              <div className="flex justify-between items-start mb-4 text-blue-400 bg-slate-800 dark:bg-blue-800/50 w-fit p-2 rounded-lg">
                 <Users size={20} />
               </div>
-              <p className="text-slate-400 text-[10px] font-bold uppercase tracking-widest">Active Investors</p>
+              <p className="text-slate-300 text-[10px] font-bold uppercase tracking-widest opacity-80">Active Investors</p>
               <h4 className="text-2xl font-black italic">1,842</h4>
             </div>
           </div>
 
           {/* Recent Listings Grid */}
-          <h4 className="text-sm font-bold text-slate-400 uppercase tracking-widest mb-6">Featured Portfolio Assets</h4>
+          <h4 className="text-sm font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-6">Featured Portfolio Assets</h4>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 pb-8">
             <PropertyCard name="Skyline Apex Center" price="$4.2M" location="Main Boulevard, LHR" trend="+8.2%" />
             <PropertyCard name="Emerald Residency" price="$2.1M" location="Defense Phase 6" trend="+12.5%" />
@@ -100,5 +109,6 @@ export default function DashboardView() {
         </div>
       </div>
     </div>
+    </motion.div>
   );
 }
