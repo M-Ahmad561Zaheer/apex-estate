@@ -18,3 +18,20 @@
 html {
   scroll-behavior: smooth;
 }
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  /* Custom scrollbar for a premium look */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-slate-50 dark:bg-slate-950;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-slate-300 dark:bg-slate-800 rounded-full hover:bg-blue-600 transition-colors;
+  }
+}
