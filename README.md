@@ -1,16 +1,56 @@
-# React + Vite
+# 🏙️ ApexEstate | Institutional Real Estate Infrastructure
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+ApexEstate is a high-performance B2B SaaS landing page designed for modern real estate firms and fintech startups. It features a institutional-grade UI, real-time data simulations, and advanced financial utility tools.
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🚀 Key Features
 
-## Expanding the ESLint configuration
+- **🌓 Dynamic Dark Mode:** Seamless theme switching with persistent state management.
+- **📈 Live Market Ticker:** Real-time property price movement simulation using Framer Motion.
+- **🧮 Smart ROI Calculator:** Interactive financial tool for multi-currency investment projections (USD, PKR, AED).
+- **🛠️ Developer-First Dashboard:** A preview of the institutional analytics suite with animated data visualizations.
+- **📅 Strategic Roadmap:** Visualized product timeline and future milestones.
+- **📩 Lead Generation:** Fully functional contact system integrated with Web3Forms.
+- **📱 Ultra Responsive:** Optimized for every device, from mobile to ultra-wide monitors.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## 🛠️ Tech Stack
+
+- **Frontend:** [React.js](https://reactjs.org/) (Vite)
+- **Styling:** [Tailwind CSS](https://tailwindcss.com/)
+- **Animations:** [Framer Motion](https://www.framer.com/motion/)
+- **Icons:** [Lucide React](https://lucide.dev/)
+- **Form Handling:** [Web3Forms API](https://web3forms.com/)
+
+---
+
+## 📂 Project Structure
+
+```text
+src/
+├── components/
+│   ├── home/         # Hero, IndustryFocus, Roadmap, FAQ
+│   ├── contact/      # LeadForm
+│   ├── layout/       # Navbar, Footer
+│   ├── shared/       # Reusable UI (Buttons, Ticker)
+├── App.jsx           # Main App Entry & Section Hierarchy
+└── index.css         # Global Styles & Tailwind Config
+
+
+⚡ Quick Start
+Clone the repository:
+
+Bash
+git clone [https://github.com/your-username/apex-estate.git](https://github.com/your-username/apex-estate.git)
+Install dependencies:
+
+Bash
+npm install
+Run the development server:
+
+Bash
+npm run dev
