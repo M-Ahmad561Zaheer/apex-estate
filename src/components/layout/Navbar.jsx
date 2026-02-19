@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Menu, X, MessageSquare, Sun, Moon } from 'lucide-react'; 
-import { motion, AnimatePresence } from 'framer-motion'; // Add imports
+import { motion, AnimatePresence } from 'framer-motion';
 import Button from '../shared/Button';
 
 export default function Navbar() {
@@ -8,29 +8,26 @@ export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
 
-  // Scroll logic
+  // --- Scroll Logic ---
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 20);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Dark Mode Logic
+  // --- Dark Mode Logic ---
   const toggleDarkMode = () => {
     const newMode = !isDarkMode;
     setIsDarkMode(newMode);
-    if (newMode) {
-      document.documentElement.classList.add('dark');
-      localStorage.setItem('theme', 'dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-      localStorage.setItem('theme', 'light');
-    }
+    document.documentElement.classList.toggle('dark', newMode);
+    localStorage.setItem('theme', newMode ? 'dark' : 'light');
   };
 
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'dark') {
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    
+    if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
       setIsDarkMode(true);
       document.documentElement.classList.add('dark');
     }
@@ -42,9 +39,17 @@ export default function Navbar() {
     { name: 'Contact', href: '#contact' },
   ];
 
+  // Helper function for smooth scrolling
+  const scrollToContact = () => {
+    setIsMobileMenuOpen(false);
+    const element = document.getElementById('contact');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
-    <nav 
-      className={`fixed top-0 w-full z-[100] transition-all duration-500 ${
+    <nav className={`fixed top-0 w-full z-[100] transition-all duration-500 ${
         isScrolled 
           ? 'bg-white/80 dark:bg-slate-950/80 backdrop-blur-xl border-b border-slate-200 dark:border-slate-800 py-3 shadow-lg shadow-slate-900/5' 
           : 'bg-transparent py-6'
@@ -70,10 +75,10 @@ export default function Navbar() {
         <div className="hidden md:flex items-center gap-10">
           {navLinks.map((link, i) => (
             <motion.a 
+              key={link.name}
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.1 }}
-              key={link.name}
               href={link.href}
               className="text-sm font-bold text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors relative group"
             >
@@ -94,23 +99,18 @@ export default function Navbar() {
           </motion.button>
 
           <div className="hidden md:block">
-            <Button 
-              className="py-2.5 px-6 text-sm flex items-center gap-2"
-            >
+            <Button onClick={scrollToContact} className="py-2.5 px-6 text-sm flex items-center gap-2">
               Talk to Expert <MessageSquare size={16} />
             </Button>
           </div>
 
-          <button 
-            className="md:hidden text-slate-900 dark:text-white p-2"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          >
+          <button className="md:hidden text-slate-900 dark:text-white p-2" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
       </div>
 
-      {/* Mobile Menu with AnimatePresence */}
+      {/* Mobile Menu */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div 
@@ -130,7 +130,9 @@ export default function Navbar() {
                   {link.name}
                 </a>
               ))}
-              <Button className="w-full py-4">Talk to Expert</Button>
+              <Button className="w-full py-4" onClick={scrollToContact}>
+                Talk to Expert
+              </Button>
             </div>
           </motion.div>
         )}
